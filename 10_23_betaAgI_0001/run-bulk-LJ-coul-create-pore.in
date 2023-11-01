@@ -1,0 +1,99 @@
+
+units 		real
+boundary 	p p p
+atom_style      charge
+atom_modify map array #atom map for rigid style
+#bond_style      harmonic
+#angle_style     harmonic
+read_data AgI_0001_lammps_cart_LJ_charge.txt 
+kspace_style pppm 1e-5
+
+#pair_style hybrid lj/cut/coul/cut  8 8 lj/cut/coul/long 12 12
+#pair_coeff * *  lj/cut/coul/long 0 0
+#pair_coeff 1    3  lj/cut/coul/long     0.5470       3.17
+#pair_coeff 1    4  lj/cut/coul/long     0.21988092      1.95
+#pair_coeff 2    3  lj/cut/coul/long     0.62188       3.34
+#pair_coeff 2    4  lj/cut/coul/long     0.24999       2.12
+#pair_coeff 3 3 lj/cut/coul/cut          0.1550          3.1536
+#pair_coeff 4 4 lj/cut/coul/cut          0.0             1.0
+#pair_coeff 5 5 lj/cut/coul/cut          0.0             1.0
+#pair_coeff 4 5 lj/cut/coul/cut          0.0             1.0
+#pair_coeff 3 4 lj/cut/coul/cut          0.0             1.0
+#pair_coeff 3 5 lj/cut/coul/cut          0.0             1.0
+
+pair_style  lj/cut/coul/long 12 12
+pair_coeff * *   0 0
+pair_coeff 1    3       0.5470       3.17
+pair_coeff 1    4       0.21988092      1.95
+pair_coeff 2    3       0.62188       3.34
+pair_coeff 2    4       0.24999       2.12
+pair_coeff 3 3          0.16275          3.16435
+#pair_coeff 4 4          0.0             1.0
+#pair_coeff 5 5          0.0             1.0
+#pair_coeff 4 5          0.0             1.0
+#pair_coeff 3 4           0.0             1.0
+#pair_coeff 3 5           0.0             1.0
+
+
+thermo 1000
+restart 50000 AgI.*.res
+
+delete_atoms overlap 0.3 all all
+region ag_top block INF INF INF INF 32 100
+region ca_bot block INF INF INF INF 3.24 11
+#fix mol all property/atom mol
+#molecule water tip4p.mol
+#create_atoms 0 random 2700 34564 ag_top mol water 25367 overlap 1.33
+timestep 2
+group agtop region ag_top
+#group solut subtract all csh
+#group water type 4 5
+#group carb  type 10 12
+#group solut union water carb
+#fix freeze csh setforce 0.0 0.0 0.0 
+# Fix CSH substrate
+#
+##############
+# Compute rdf
+#compute myRDF all rdf 50 11 7 11 8 11 9 11 12 4 7 4 8 4 9 4 11 cutoff 8.0
+# Compute chunks
+#compute binchunk1 water chunk/atom bin/1d z center 0.002 units reduced
+#compute binchunk2 carb  chunk/atom bin/1d z center 0.002 units reduced
+# Average chunk values
+#fix 444 water ave/chunk 100 5 1000 binchunk1 density/mass ave running file binned_density_wat.dat 
+#fix 555 carb  ave/chunk 100 5 1000 binchunk2 density/mass ave running file binned_density_carb.dat 
+##############
+dump 101 all xyz 1000 AgI.xyz
+dump 1011 all xyz 1000 AgI_vmd.xyz
+dump_modify 1011 element Ag I Ow Hw Of
+compute Mytemp agtop temp
+thermo_style custom step temp c_Mytemp pe ebond evdwl ecoul elong ke press density lz cella cellb cellc cellalpha cellbeta cellgamma
+#fix 11 all ave/time 100 1 100 c_myRDF[*] file co.rdf mode vector start 100000
+#fix integrate sol_surf rigid/nvt/small molecule temp 300.0 300.0 100.0
+#neigh_modify exclude molecule/intra sol_surf
+#velocity sol_surf create 300.0 5813775 dist gaussian
+#displace_atoms agtop move 0 0 15
+run 0
+write_data data.agi_slab-35 nocoeff
+unfix 1
+undump 101
+undump 1011
+######### NVE I ############
+fix 1 sol_surf nve
+run 0
+dump 101 all xyz 20 AgI_NVE_I.xyz
+dump 1011 all xyz 20 AgI_NVE_I_vmd.xyz
+dump_modify 1011 element Ag I Ow Hw Of
+#fix 1 sol_surf nve
+run 0
+unfix 1
+undump 101
+undump 1011
+######### NVE II ############
+dump 101 all xyz 2000 AgI_md_NVE_II.xyz
+dump 1011 all xyz 2000 AgI_md_NVE_II_vmd.xyz
+dump_modify 1011 element Ag I Ow Hw Of
+fix 1 sol_surf nve
+run 0
+
+write_data data.agi_water-33 nocoeff
