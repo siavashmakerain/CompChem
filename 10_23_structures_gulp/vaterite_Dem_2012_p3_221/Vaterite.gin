@@ -1,0 +1,58 @@
+single nosymmetry full conv noewald noelectro spatial qiter
+#phonon dynamical_matrix eigenvectors
+#fbfgs pdf prop qiter spatial conv opti
+title
+Preparing supercell for Vaterite (Demichelis, 2012)
+with space group P3_2 21
+end
+# First structure
+cell
+7.1239 7.1239 25.3203 90 90 120
+fractional  
+Ca   0.98731   0.00884   0.25020
+Ca   0.66938   0.29692   0.25375
+Ca   0.30357   0.63281   0.24648
+C   0.03394   0.36633   0.16169
+C   0.94957   0.62773   0.66089
+C   0.00000   0.30149   0.83333
+C   0.00000   0.69852   0.33333
+O  0.00000   0.11971   0.83333
+O   0.00000   0.87944   0.33333
+O   0.98084   0.37860   0.78859
+O   0.99342   0.60886   0.28838
+O   0.92793   0.26758   0.12000
+O   0.99651   0.67669   0.61111
+O   0.21701   0.54412   0.15803
+O   0.77434   0.44983   0.67169
+O   0.96475   0.29501   0.20912
+O   0.07260   0.75107   0.69768
+spacegroup
+154
+supercell
+4 8 2 #for surface calculations
+#5 10 4 
+#temperature 300
+pressure 1 atm
+maxcyc opt 10000
+#box density number 128
+#observable
+#shear_modulus
+#-0.1234 100.0
+#bulk_modulus
+#0 0
+#poisson_ratio
+#0 0
+#end
+#default_weight cell_length 1.0
+#default_weight cell_angle 1.0
+#default_weight cell_angle 1.0
+
+library c1cp21034c.lib nodump
+
+
+
+rcspatial 2.5
+dump every 10000 Vaterite_bulk.grs cart
+output movie 1000 xyz Vaterite_bulk.xyz 
+#output phonon 1002_aragonite_3x_phonon_densities.dens
+ 

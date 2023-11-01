@@ -1,0 +1,42 @@
+single nosymmetry full conv noewald noelectro spatial qiter
+#phonon dynamical_matrix eigenvectors
+#fbfgs pdf prop qiter spatial conv opti
+title
+Preparing supercell for AgI (Hull, 1999)
+end
+# First structure
+cell
+4.599 4.599 7.524 90 90 120
+fractional  
+Mg  core  0.3333        0.6667        0.6256 
+O   core 0.3333         0.6667        0
+spacegroup
+186
+supercell
+1 1 1 #for surface calculations
+#5 10 4 
+#temperature 300
+pressure 1 atm
+maxcyc opt 10000
+#box density number 128
+#observable
+#shear_modulus
+#-0.1234 100.0
+#bulk_modulus
+#0 0
+#poisson_ratio
+#0 0
+#end
+#default_weight cell_length 1.0
+#default_weight cell_angle 1.0
+#default_weight cell_angle 1.0
+
+library c1cp21034c.lib nodump
+
+
+
+rcspatial 2.5
+dump every 10000 AgI_bulk.grs cart
+output movie 1000 xyz AgI_bulk.xyz 
+#output phonon 1002_aragonite_3x_phonon_densities.dens
+ 

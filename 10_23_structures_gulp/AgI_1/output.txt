@@ -1,0 +1,203 @@
+********************************************************************************
+*                       GENERAL UTILITY LATTICE PROGRAM                        *
+*                                 Julian Gale                                  *
+*                       Curtin Institute for Computation                       *
+*                    School of Molecular and Life Sciences                     *
+*                    Curtin University, Western Australia                      *
+********************************************************************************
+* Version = 6.1.2 * Last modified =   3rd November 2022                        *
+********************************************************************************
+*  single       - perform a single point run                                   *
+*  conv         - constant volume calculation                                  *
+*  noelectro    - do not include electrostatic terms despite charges present   *
+*  qiterative   - use iterative solution of charges in ReaxFF / EEM / QEq      *
+*  nosymmetry   - turn off symmetry after initial structure generation         *
+*  full         - generate full unit cell when symmetry is removed             *
+*  spatial      - use spatial decomposition algorithm                          *
+********************************************************************************
+* Preparing supercell for AgI (Hull, 1999)                                     *
+********************************************************************************
+
+
+  Job Started  at 20:34.49 24th October    2023                               
+
+  Number of CPUs =     1
+
+  Host name      = ip-172-31-18-205.ec2.internal           
+
+
+  Total number of configurations input =      1
+
+********************************************************************************
+*  Input for Configuration =   1                                               *
+********************************************************************************
+
+  Formula = Mg6O6                                                       
+
+  Number of irreducible atoms/shells =      12
+
+
+  Total number atoms/shells =      12
+
+  Dimensionality = 3               :  Bulk   
+
+
+
+  Cartesian lattice vectors (Angstroms) :
+
+        4.599000    0.000000    0.000000
+       -2.299500    3.982851    0.000000
+        0.000000    0.000000    7.524000
+
+  Cell parameters (Angstroms/Degrees):
+
+  a =       4.5990    alpha =  90.0000
+  b =       4.5990    beta  =  90.0000
+  c =       7.5240    gamma = 120.0000
+
+  Initial cell volume =         137.818093 Angs**3
+
+  Temperature of configuration =   0.00     K 
+
+  Pressure of configuration =         0.000 GPa 
+
+  Fractional coordinates of asymmetric unit :
+
+--------------------------------------------------------------------------------
+   No.  Atomic       x           y          z         Charge      Occupancy
+        Label      (Frac)      (Frac)     (Frac)        (e)         (Frac)  
+--------------------------------------------------------------------------------
+      1 Mg    c    0.333300    0.666700    0.625600     0.00000    1.000000    
+      2 Mg    c    0.666700    0.333300    0.125600     0.00000    1.000000    
+      3 Mg    c    0.333300    0.666600    0.625600     0.00000    1.000000    
+      4 Mg    c    0.333400    0.666700    0.625600     0.00000    1.000000    
+      5 Mg    c    0.666600    0.333300    0.125600     0.00000    1.000000    
+      6 Mg    c    0.666700    0.333400    0.125600     0.00000    1.000000    
+      7 O     c    0.333300    0.666700    0.000000     0.00000    1.000000    
+      8 O     c    0.666700    0.333300    0.500000     0.00000    1.000000    
+      9 O     c    0.333300    0.666600    0.000000     0.00000    1.000000    
+     10 O     c    0.333400    0.666700    0.000000     0.00000    1.000000    
+     11 O     c    0.666600    0.333300    0.500000     0.00000    1.000000    
+     12 O     c    0.666700    0.333400    0.500000     0.00000    1.000000    
+--------------------------------------------------------------------------------
+
+
+
+********************************************************************************
+*  General input information                                                   *
+********************************************************************************
+
+  Species output for all configurations : 
+
+--------------------------------------------------------------------------------
+  Species    Type    Atomic    Atomic    Charge       Radii (Angs)     Library
+                     Number     Mass       (e)     Cova   Ionic  VDW   Symbol
+--------------------------------------------------------------------------------
+    Mg       Core       12      24.31   0.000000   1.100  0.000  1.640          
+    O        Core        8      16.00   0.000000   0.730  0.000  1.360          
+--------------------------------------------------------------------------------
+
+
+  Lattice summation method               =    Ewald          (3-D)
+                                         =    Parry          (2-D)
+                                         =    Saunders et al (1-D)
+  Accuracy factor for lattice sums       =   12.000
+
+
+  Analytic derivatives to be used
+
+  Time limit = Infinity
+
+  Maximum range for interatomic potentials =    100000.000000 Angstroms
+
+  ReaxFF forcefield to be used
+
+  ReaxFF Coulomb cutoff =  10.0000 Ang
+  ReaxFF VDW     cutoff =  10.0000 Ang
+  ReaxFF H-bond  cutoff =   7.5000 Ang
+
+  ReaxFF pairwise bond order       threshold = 0.00100000000000
+  ReaxFF angle/torsion bond order  threshold = 0.00100000000000
+  ReaxFF bond order double product threshold = 0.00000100000000
+  ReaxFF bond order triple product threshold = 0.00000000100000
+  ReaxFF hydrogen-bond bond order  threshold = 0.01000000000000
+
+
+  General interatomic potentials :
+
+--------------------------------------------------------------------------------
+Atom  Types   Potential      Parameter       Value         Units   Cutoffs(Ang)
+  1     2                                                            Min /  Max 
+--------------------------------------------------------------------------------
+O    c Mg   c Lennard       Lennard-Jones A  4700.0000    eV*Ang^m  0.000 10.000
+                            Lennard-Jones B  0.0000000    eV*Ang^n  
+                            Exponent m        12          None
+                            Exponent n         6          None
+--------------------------------------------------------------------------------
+
+********************************************************************************
+*  Output for configuration   1                                                *
+********************************************************************************
+
+
+  Components of enthalpy : 
+
+--------------------------------------------------------------------------------
+  Interatomic potentials     =           1.35128413 eV    
+  ReaxFF force field         =                  NaN eV    
+  Monopole - monopole (real) =           0.00000000 eV    
+  Monopole - monopole (recip)=           0.00000000 eV    
+  Monopole - monopole (total)=           0.00000000 eV    
+  Pressure*volume            =           0.00008716 eV    
+--------------------------------------------------------------------------------
+  Total lattice enthalpy     =                  NaN eV    
+--------------------------------------------------------------------------------
+  Total lattice enthalpy     =                  NaN kJ/(mole unit cells)
+--------------------------------------------------------------------------------
+
+  XYZ File open for Movie as AgI_bulk.xyz
+
+
+
+  Final charges from ReaxFF :
+
+--------------------------------------------------------------------------------
+    Atom no.            Atomic No.             Charge
+--------------------------------------------------------------------------------
+         1                  12                 2.0000000
+         2                  12                 2.0000000
+         3                  12                 2.0000000
+         4                  12                 2.0000000
+         5                  12                 2.0000000
+         6                  12                 2.0000000
+         7                   8                -2.0000000
+         8                   8                -2.0000000
+         9                   8                -2.0000000
+        10                   8                -2.0000000
+        11                   8                -2.0000000
+        12                   8                -2.0000000
+--------------------------------------------------------------------------------
+
+
+  Peak dynamic memory used =       1.90 MB 
+
+
+  Timing analysis for GULP :
+
+--------------------------------------------------------------------------------
+  Task / Subroutine                                          Time (Seconds)
+--------------------------------------------------------------------------------
+  Calculation of real space energy and derivatives                0.0004
+  Calculation of reaxFF energy and derivatives                    0.0005
+  Electronegativity equalisation                                  0.0006
+  Symmetry generation of equivalent positions                     0.0003
+--------------------------------------------------------------------------------
+  Total CPU time                                                  0.0074
+--------------------------------------------------------------------------------
+
+
+  Dump file written as AgI_bulk.grs
+
+
+  Job Finished at 20:34.49 24th October    2023                               
+
